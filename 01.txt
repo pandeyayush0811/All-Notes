@@ -1,0 +1,203 @@
+{*} - VERY IMPORTANT
+
+
+_____________________
+
+{*} kabhi kabhi node downloaded files corrupt ho jaate hain , uske liye tumko phir se saara node modules and package-lock json files bhi delete karke sab phir se install karna hota hai , uske liye : 
+
+1. Remove-Item -Recurse -Force node_modules
+2. Remove-Item -Force package-lock.json
+
+and then npm install
+
+
+{*} 
+
+
+
+____________________________
+
+
+
+
+
+TITLE OF THE VIDEO : rEACT IN 2 HRS WITH PROJECT
+LINK : (https://youtu.be/aXkAHmy7cvQ?si=A9BlFAG8d3nqAFKj)
+
+1. start
+  a. set up react using vite: vite@latest .       
+  b. check  for react updates : npx npm-check-updates
+
+
+3. What is Destructuring ?
+
+  Alright, imagine you have a box of chocolates 🍫, and inside that box, you have different types—let's say dark chocolate, milk chocolate, and white chocolate.Instead of opening the box and picking chocolates one by one, you can take them out all at once and put them into separate plates.
+
+  A normal way to take values from an array:
+
+          const chocolates = ["Dark", "Milk", "White"];
+
+          const first = chocolates[0];  // "Dark"
+          const second = chocolates[1]; // "Milk"
+          const third = chocolates[2];  // "White"
+
+  This is long and boring! 😴
+
+  With destructuring, we can do this in one line:
+
+        const [first, second, third] = chocolates;
+
+        console.log(first);  // "Dark"
+        console.log(second); // "Milk"
+        console.log(third);  // "White"
+
+  Much shorter and cleaner! ✅
+
+
+4. What is Props ?
+
+  props hai bilkul function ki tarah jaise hmm kisi function me arguments dete hai aur use function ke andar use karte hai waise waise hin hai props 
+
+  maan lo tum bheja name="Ayush"
+
+  To call : props.name
+
+
+5. What is Props Drilling ?
+
+  Alright, imagine you have a water tank 🏡 filled with water at the top floor of your house. Now, you need to send water down to the ground floor. But there's a problem! 🚰 You don’t have a direct pipe from the tank to the ground floor. Instead, the water must pass through every floor in between. Each floor gets the water and then passes it down to the next one.
+
+  What is Props Drilling?
+  When data (props) needs to be passed from a parent component to a deeply nested child, and each middle component must pass it down, that's called props drilling.
+
+  Example of Props Drilling
+  Let’s say we have a Grandparent component, which has a Parent, and inside it, there’s a Child. The Child needs some data, but the data is in Grandparent.
+
+
+        const Grandparent = () => {
+          const message = "Hello from Grandparent!";
+          return <Parent message={message} />;
+        };
+
+        const Parent = ({ message }) => {
+          return <Child message={message} />;
+        };
+
+        const Child = ({ message }) => {
+          return <h1>{message}</h1>;
+        };
+
+        export default Grandparent;
+
+
+  Here, the message has to go from Grandparent → Parent → Child, even though Parent doesn’t even need it! 😵‍💫
+
+  This is annoying because:
+      Every middle component has to pass the props even if it doesn’t need them.
+      Code becomes messy when we have many nested components.
+      If we rename the prop, we have to change it everywhere.
+
+
+  ✅ How to Fix Props Drilling?
+    Instead of passing props through every level, we can directly give data to the component that needs it.
+
+  1️⃣ Using Context API (Best for small apps)
+  2️⃣ Using Redux (For large apps)
+
+  🔥 Conclusion
+  Props drilling = forcing props through many components unnecessarily.
+  Fix it with Context API or Redux so that components can get data directly instead of passing it step by step.
+
+
+6. 🔵 What is e.target.value ?
+
+  It’s just a way to get the value typed inside an input box!
+  e.target.value helps you check what’s inside an input field! ✨
+
+
+7.🤔 What is e in onChange(e)?
+
+  e (short for event) is the action happening (typing in this case).
+  e.target is the input field.
+  e.target.value is the text inside the input field.
+
+
+8.  Why is useEffect running twice?
+
+  👉 Reason: React Strict Mode (Only in Development Mode)
+  In React 18, if your app is wrapped in StrictMode (which is the default in create-react-app), React automatically runs useEffect twice in development mode.
+
+  This is to detect side effects (bugs) early and ensure your code behaves correctly.
+
+  🚀 Strict Mode only affects development, not production. So, in the final build, it will run normally.
+
+
+9.  React-router-dom ?
+
+  Good question, bro! In professional React development, we organize React Router DOM setup properly instead of putting everything in App.js.
+
+  In a real-world project, we keep routing in a separate file like AppRouter.js and use it inside App.js
+
+
+10. yaaad rakhna : Link component sirf Router ke andar kaam karta hai. Tumne shayad Navbar ko bina BrowserRouter ke wrap kiye use kiya hoga. Isko fix karne ke liye ensure karo ki tumne BrowserRouter use kiya ho.
+
+
+11. Custom Hook ?
+
+  But Why Custom Hook?
+  Samajh yeh, agar tu ek hi logic baar-baar likh raha hai alag-alag components me, toh behtar hai us logic ko ek hook me daal de.
+
+  Example: Tu ek button ka color dark/light toggle karna chahta hai, aur yeh logic multiple components me chahiye.
+
+  👉 Instead of copy-pasting the logic everywhere, hum ek Custom Hook (useToggle) banayenge jo reusable hoga! 🔥
+
+  Now,
+
+  🔹 Hook banate waqt:
+
+  Function ka naam use se start hona chahiye → (e.g., useToggle)
+  Hooks ke andar normal React hooks (useState, useEffect) use ho sakte hain
+
+  🔥 Summary
+  ✔ Custom Hook ek function hai jo React hooks use karta hai (like useState, useEffect)
+  ✔ Code reuse karne ke liye perfect hai – ek jagah likho, kahin bhi use karo!
+  ✔ Naam use se start hona chahiye (e.g., useFetchData, useToggle, useDarkMode)
+  ✔ Components ka code clean aur simple ho jata hai!
+
+
+
+
+
+------------------------------------
+
+
+
+
+
+
+
+
+ CSS : 
+
+
+1. ml-auto ka matlab kya hai? 🤔
+
+  ml-auto Tailwind CSS ka ek utility class hai, jo margin-left: auto apply karta hai.
+
+  Iska kaam kya hai?
+  Jab kisi element pe ml-auto lagate ho, toh wo jitna ho sake left side se door chale jata hai aur apni parent container ke end tak chala jata hai. Yeh sirf flex ya grid wale containers me kaam karega.
+
+2. min-h-screen ka matlab kya hai? 🤔
+
+  👉 Tailwind CSS me min-h-screen ka use kisi element ko pure screen ke height tak extend karne ke liye hota hai.
+  👉 Ye CSS: min-height: 100vh; ka shorthand hai.
+
+
+
+
+-----------------------------------
+
+
+
+
+

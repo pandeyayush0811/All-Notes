@@ -1,0 +1,47 @@
+1. what is Json data ?
+
+Jab data URL se aata hai (ya frontend se request ke through aata hai), wo raw format me hota hai, jo human-readable nahi hota. express.json() usko proper JavaScript object me convert kar deta hai, jo easily samajh aata hai aur use kar sakte hain.
+
+🌍 Without express.json() (Raw Form)
+Agar express.json() nahi lagate, to data kuch is tarah dikhega (as a raw string):
+
+
+"{\"name\":\"Ayush\",\"age\":22}"
+Ye escaped string hota hai, jo samajhna mushkil hai.
+
+
+✅ With express.json() (Proper JSON)
+Agar express.json() laga diya, to wahi data automatically convert ho jayega:
+
+{ name: "Ayush", age: 22 }
+Ab ye ek JavaScript object ban gaya, jise easily access kar sakte hain:
+
+console.log(req.body.name); // Output: Ayush
+console.log(req.body.age); 
+
+
+ISILYE HMM APNE CODE ME INCLUDE KARTE HAIN KI DATA SAMJH AAYE AUR ISE EK BAAR BSS MAIN FILE ME DAAL DO BSS HO GAYA.:
+
+app.use(express.json()); // JSON data handle karne ke liye AUR HAAN YE EK MIDDLEWARE HAIN.
+
+------------------------------------------------------------------
+
+hmm professional project me app.get use nhi karte balki router.get ka use karte hain. aur main server file me yaani server.js me saare router files ko call kar lete hain. ✅ server.js → Routes ko connect karega (Sab kuch ek saath chale).
+
+pehle jo pehla file banega usme router import karenge :
+
+        const express = require('express');
+        
+        const router = express.Router(); // 'Router' should be capitalized
+
+
+aur uske baad routes banega. Aur haan routes ki alag alag files hongi jaise jo users ke liye hai vo alag, jaise user kuch upload kiya ya delete kiya apne profile se. 
+
+Doosra vaise routes jo naaye users ke liye honge like login, sinup, etc etc.
+
+mujhe utna abhi nhi pata ki aur kitne tarah ke routes files banti hain.
+
+            │── /routes         # Routes folder
+            │    ├── userRoutes.js    #files
+            │    ├── authRoutes.js    
+            │    ├── postRoutes.js 

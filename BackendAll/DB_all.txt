@@ -1,0 +1,188 @@
+Now aage bharne se pehle database setup karna hoga kyunki step by step chal rhe hain na :
+
+first get link form atlas.
+
+then install mongoose in your project via terminal.
+
+mongoose ek js library hai jo tumhare js code ko mongodb database se connect karti hain bss.
+
+ab hmm do files banate hain :
+             1. Config ke andar db.js => isme me code se Database connect karne ka code likhenge sirf connect ke liye.
+             2. Models Folder ke andar user.model.js (naam db kis type ka hai uske hisab se hmm yahan pe users ki details save karenge isliye. agar product ki details save karte to product hota). => isme hmm banate hain ki database me data kaise save hoga , db ka structure kaisa hoga. data kya jayega aur uska structure.
+             
+               
+
+             eg.        const mongoose = require("mongoose");
+
+                        const userSchema = new mongoose.Schema({
+                            name: { type: String, required: true },
+                            email: { type: String, required: true, unique: true },
+                            password: { type: String, required: true },
+                        });
+
+                        module.exports = mongoose.model("User", userSchema);
+
+                        iss last code ka matlab hai ki jo db ka structure hoga vo UserSchema hoga aur databse ka naam User hoga.
+
+ye dono files ko hmm main file me call karenge, dono ko nhi balki sirf db connection wala ko bss server.js me import kar ke call karenge, kyunki jaise hin hamara main file chale hamara db connection ka code chale aur db connect ho jaaye , baaki data to hmm aaram se bhegenge na....
+
+        
+        const connectDB = require("./config/database"); // MongoDB Connection
+        connectDB();
+
+data structure ka file hmm uss route me bhenjege jahan uska need hoga :
+
+    Haan, bilkul sahi! 😎 Data structure (models) ka use sirf un routes me hoga jahan zaroorat hogi.
+
+    📌 Kaise Use Karenge?
+    Database structure (user.model.js) sirf ek baar banega.
+    Jis route ko uska data chahiye, wahi usko import karega.
+
+aise import karenge : const User = require("../models/user.model"); // 👈 Import model
+
+ab jab hmne import kar liya ab hmm ise call nhi karenge hmm pehle hin ise User variable me apna databse daal chuke hai aur abb agar ise DB se kuch chahiye to hmm aise lenge :
+
+        User.findOne({ email }); ye kya karega ki iss email jis user ka hoga , uss user ka poora data de dega.
+
+ab hmm dekhnge ki user value daalega to data kaise db me jaayega 
+
+
+----------------------------------------------------------------------------------------
+
+ab hmm dekhnge ki user value daalega to data kaise db me jaayega : 
+
+    user jab bhi form bharta hai ya koi bhi data deta hai to data url se aati hain. URL ke body me aati hai hmm use aise reach karte hain : 
+
+            const { name, email, password } = req.body; yahan pe destructure use kiya hai.
+
+            request . body me se ye 3 no data ka variable ban jaega aur uss data ko restore kar lega.
+
+            1. kyunki users pehli baar signup karega to :
+
+                    // ✅ Check if user already exists
+                    let user = await User.findOne({ email });
+                    if (user) {
+                        return res.status(400).json({ message: "User already exists" });
+                    }
+
+
+
+            return res.status(400).json({ message: "User already exists" });
+            👉 Ye line server se client ko ek response bhej rahi hai. 🚀
+            Chalo ise step-by-step samajhte hain:
+
+                📌 1️⃣ res.status(400) :
+
+                    res → Response ka short form hai, jo client ko reply bhejne ke liye use hota hai.
+                    .status(400) → Ye HTTP Status Code hai, jo batata hai ki request galat thi (Bad Request).
+                    400 ka matlab hai ki user ki request valid nahi hai, jaise ki email already exist kar raha hai.
+                    json data ka matlan iss data ko as json data bhej do bss.
+                
+                📌 Example of Status Codes:
+
+
+                        Code	Meaning
+                        200	OK (Request sahi thi, data mil gaya)
+                        201	Created (Naya data successfully create hua)
+                        400	Bad Request (User ki taraf se galti hai)
+                        401	Unauthorized (Authentication required)
+                        404	Not Found (Data nahi mila)
+                        500	Internal Server Error (Server ki taraf se issue)
+
+
+            2. ab ham password ko hash karte hain ek package ki help se (bcrypt) :
+                    npm i bcrypt bss ho gaya , ise require karo jisme chahiye :
+
+                    const bcrypt = require("bcrypt");
+
+                    and then : 
+
+                         // ✅ Hash Password
+                            const salt = await bcrypt.genSalt(10);
+                            const hashedPassword = await bcrypt.hash(password, salt);
+
+
+                        🔐 Understanding This Code:
+
+                // ✅ Hash Password
+                const salt = await bcrypt.genSalt(10);
+                const hashedPassword = await bcrypt.hash(password, salt);
+
+
+                Ye password hashing ka process hai, jo bcrypt library ka use karke password ko encrypt karta hai. 🚀
+                Chalo step-by-step breakdown dekhte hain.
+
+                🔹 1️⃣ bcrypt.genSalt(10)
+
+                const salt = await bcrypt.genSalt(10);
+
+                Salt ek random string hota hai jo password me add kiya jata hai.
+                Ye hashing ko aur strong banata hai.
+                10 ka matlab 10 rounds tak hashing algorithm chalega.
+                Jitne zyada rounds, utna zyada secure hashing (but slow performance).
+
+                📌 Example Salt Output:
+                    $2b$10$w45FQIvOaLOpGUnxyLkNEO
+                    Ye ek unique salt hai jo password ke sath combine hoga.
+
+                🔹 2️⃣ bcrypt.hash(password, salt)
+
+                const hashedPassword = await bcrypt.hash(password, salt);
+                Password + Salt ko mix karke ek secure hashed password generate hota hai.
+
+        3. ab hmm user ke email, password, aur password ko save karenge :
+
+              // ✅ Create New User
+        user = new User({ name, email, password: hashedPassword }); // password me actual password ke ulta hash password bheje.
+                await user.save(); 
+
+        ek aur baat maan lo hmne password hash karke hard password db me store kar diya ab login ke samay uss paasword ko user ke actual password se match/decode bhi karna hoga na to : 
+
+                // ✅ Compare Password
+                const isMatch = await bcrypt.compare(password, user.password); checking ki user ka password aur hash match kiya ki nhi aur agar kiya to login varna return invalid niche wala
+                if (!isMatch) return res.status(400).json({ message: "Invalid email or password" });
+
+
+        4. ab ham 4 step me token create karenge kyunki use web ya app me user ke pass bhejna hota hai ki user agar ek baar login kiya ho to use baar baar , har baar login na karna pade :
+
+                hmm yahan JWT token ka use karenge :
+                npm i jsonwebtoken and ise uss file me require bhi karenge  : const jwt = require("jsonwebtoken");
+
+
+                now, chalo token banate hain : 
+
+                          // ✅ Generate JWT Token
+                        const token = jwt.sign({ userId: user._id }, "akka", { expiresIn: "1h" });
+
+                        Breakdown of code :
+
+                        const token = jwt.sign({ userId: user._id }, "akka", { expiresIn: "1h" });
+                        Part :                	         Explanation :
+                       1.  { userId: user._id }        	 Payload: Token ke andar user ka unique ID store ho raha hai.ye user id user DB ka id hai 
+                        2. "akka"	Secret Key:              Isse JWT sign kiya jata hai. Sirf server isko verify kar sakta hai.
+                       3.  { expiresIn: "1h" }	             Expiration: Token 1 hour ke baad invalid ho jayega.
+
+ 1. token ban gaya ab ise bhejna hai user ke pass to 2 types hai Web and APP :
+
+    A. Web : web me hmm direct token set kar dete hai backend se , like 
+
+            const token = jwt.sign({ userId: user._id }, "akka", { expiresIn: "1h" });
+
+            res.cookie("token", token, {
+                httpOnly: true, // ✅ JavaScript can't access it
+                secure: true,   // ✅ Works only on HTTPS
+                sameSite: "Strict", 
+                maxAge: 3600000, // 1 Hour
+            }).status(200).json({ message: "Login Successful" });
+
+    B. App : lekin app internet pe yaani website nhi hai na to hame server se token frontend pe as JSON data bhejna hota hai and phir usko frontend yaani app pe receive karke localStorage ya AsyncStorage me store karna padta hai aur logic frontend pe hin banata hota hai login logout and signup ka , jo ki hmmlog web ki case me backend se karte the.
+
+            res.status(200).json({
+                message: "Login Successful",
+                token: token  // ✅ Send to Frontend
+            });
+
+    ✅ Conclusion:
+
+    1. Web me backend secure cookies handle karega → frontend par kuch store nahi hota!
+    2. App me frontend JWT store karega → frontend hi authentication manage karega!

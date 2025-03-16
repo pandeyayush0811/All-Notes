@@ -1,0 +1,6 @@
+logout and profile ko add kiye ki koi 3 buttopn pe click karen to uske pass ek chota sa side se nikal ke aaye.
+
+
+main css sikhe mainly position absolute and shadow sikhna baaki hai acche se.
+
+

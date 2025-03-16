@@ -1,0 +1,8 @@
+1. Axois .
+2. AsyncStorage .
+3. useRouter .
+4. useFocusEffect 
+5.  router.replace .
+6. Router.push .
+7. SafeAreaProvider .
+8. Redirect .

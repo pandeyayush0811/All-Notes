@@ -1,0 +1,172 @@
+Q1.     PS D:\New folder\baba\Course> npx create-expo-app@latest
+    Creating an Expo project using the default template.
+
+    To choose from all available templates pass in the --template arg:
+      $ npx create-expo-app --template
+
+    To choose from all available examples pass in the --example arg:
+      $ npx create-expo-app --example
+
+    √ What is your app named? ... TechApp
+    √ Downloaded and extracted project files.
+    > npm install
+    npm warn deprecated inflight@1.0.6: This module is not supported, and leaks memory. Do not use it. Check out lru-cache if you wsted way to coalesce async requests by a key value, which is much more comprehensive and powerful.
+    npm warn deprecated domexception@4.0.0: Use your platform's native DOMException instead
+    npm warn deprecated abab@2.0.6: Use your platform's native atob() and btoa() methods instead
+    npm warn deprecated @babel/plugin-proposal-optional-chaining@7.21.0: This proposal has been merged to the ECMAScript standard ain is no longer maintained. Please use @babel/plugin-transform-optional-chaining instead.
+    npm warn deprecated @babel/plugin-proposal-nullish-coalescing-operator@7.18.6: This proposal has been merged to the ECMAScript  this plugin is no longer maintained. Please use @babel/plugin-transform-nullish-coalescing-operator instead.
+    npm warn deprecated @babel/plugin-proposal-class-properties@7.18.6: This proposal has been merged to the ECMAScript standard ann is no longer maintained. Please use @babel/plugin-transform-class-properties instead.
+    npm warn deprecated rimraf@3.0.2: Rimraf versions prior to v4 are no longer supported
+    npm warn deprecated @xmldom/xmldom@0.7.13: this version is no longer supported, please update to at least 0.8.*
+    npm warn deprecated sudo-prompt@8.2.5: Package no longer supported. Contact Support at https://www.npmjs.com/support for more i
+    npm warn deprecated glob@7.2.3: Glob versions prior to v9 are no longer supported
+    npm warn deprecated rimraf@2.6.3: Rimraf versions prior to v4 are no longer supported
+    npm warn deprecated glob@7.2.3: Glob versions prior to v9 are no longer supported
+    npm warn deprecated glob@7.2.3: Glob versions prior to v9 are no longer supported
+    npm warn deprecated glob@7.2.3: Glob versions prior to v9 are no longer supported
+    npm warn deprecated glob@7.2.3: Glob versions prior to v9 are no longer supported
+    npm warn deprecated glob@7.2.3: Glob versions prior to v9 are no longer supported
+    npm warn deprecated sudo-prompt@9.1.1: Package no longer supported. Contact Support at https://www.npmjs.com/support for more i
+    PS D:\New folder\baba\Course>  npx create-expo-app@latest
+    Creating an Expo project using the default template.
+
+    To choose from all available templates pass in the --template arg:
+      $ npx create-expo-app --template
+
+    To choose from all available examples pass in the --example arg:
+      $ npx create-expo-app --example
+
+    √ What is your app named? ... CourseApp
+    √ Downloaded and extracted project files.
+    > npm install
+    npm warn deprecated inflight@1.0.6: This module is not supported, and leaks memory. Do not use it. Check out lru-cache if you wsted way to coalesce async requests by a key value, which is much more comprehensive and powerful.
+    npm warn deprecated @babel/plugin-proposal-class-properties@7.18.6: This proposal has been merged to the ECMAScript standard ann is no longer maintained. Please use @babel/plugin-transform-class-properties instead.
+    npm warn deprecated @babel/plugin-proposal-nullish-coalescing-operator@7.18.6: This proposal has been merged to the ECMAScript  this plugin is no longer maintained. Please use @babel/plugin-transform-nullish-coalescing-operator instead.
+    npm warn deprecated rimraf@2.6.3: Rimraf versions prior to v4 are no longer supported
+    npm warn deprecated @babel/plugin-proposal-optional-chaining@7.21.0: This proposal has been merged to the ECMAScript standard ain is no longer maintained. Please use @babel/plugin-transform-optional-chaining instead.
+    npm warn deprecated rimraf@3.0.2: Rimraf versions prior to v4 are no longer supported
+    npm warn deprecated glob@7.2.3: Glob versions prior to v9 are no longer supported
+    npm warn deprecated glob@7.2.3: Glob versions prior to v9 are no longer supported
+    npm warn deprecated glob@7.2.3: Glob versions prior to v9 are no longer supported
+    npm warn deprecated glob@7.2.3: Glob versions prior to v9 are no longer supported
+    npm warn deprecated glob@7.2.3: Glob versions prior to v9 are no longer supported
+    npm warn deprecated glob@7.2.3: Glob versions prior to v9 are no longer supported
+    npm warn deprecated glob@7.2.3: Glob versions prior to v9 are no longer supported
+    npm warn deprecated glob@7.2.3: Glob versions prior to v9 are no longer supported
+    npm warn deprecated abab@2.0.6: Use your platform's native atob() and btoa() methods instead
+    npm warn deprecated sudo-prompt@9.1.1: Package no longer supported. Contact Support at https://www.npmjs.com/support for more i
+    npm warn deprecated sudo-prompt@8.2.5: Package no longer supported. Contact Support at https://www.npmjs.com/support for more i
+
+    added 1166 packages, and audited 1167 packages in 2m
+
+    107 packages are looking for funding
+      run `npm fund` for details
+
+    5 low severity vulnerabilities
+
+    To address all issues (including breaking changes), run:
+      npm audit fix --force
+
+    Run `npm audit` for details.
+
+    ✅ Your project is ready!
+
+    To run your project, navigate to the directory and run one of the following npm commands.
+
+    - cd CourseApp
+    - npm run android
+    - npm run ios # you need to use macOS to build the iOS project - use the Expo app if you need to do iOS development without a M
+    - npm run web
+
+
+
+
+
+ANS - 🔍 Understanding the Errors and Warnings in Your Expo Project Setup
+Your installation of Expo completed successfully, but there are multiple warnings about deprecated packages. These aren't critical errors, but they indicate that some dependencies are outdated and might cause issues in the future.
+
+🚨 Key Issues in Your Error Log
+Deprecated Packages
+Many npm warnings (npm WARN deprecated) indicate that some dependencies are outdated and no longer supported.
+
+Examples:
+inflight@1.0.6 → Leaks memory, suggested alternative: lru-cache
+rimraf@2.6.3 and rimraf@3.0.2 → Not supported, upgrade to rimraf v4
+glob@7.2.3 → Versions below v9 are no longer supported
+sudo-prompt@9.1.1 → No longer maintained
+Babel Plugins (@babel/plugin-proposal-class-properties, @babel/plugin-proposal-nullish-coalescing-operator, etc.) are now part of standard JavaScript, so they are no longer needed.
+
+
+Security Vulnerabilities
+
+
+5 low severity vulnerabilities
+To address all issues (including breaking changes), run:
+npm audit fix --force
+There are 5 low-severity security vulnerabilities.
+These can be fixed using:
+
+npm audit fix
+If that doesn't work, try:
+
+npm audit fix --force
+(⚠️ Warning: This may install breaking changes, so use with caution.)
+
+
+
+✅ How to Fix These Issues?
+Update npm and Expo CLI
+First, ensure your npm and Expo CLI are up to date:
+
+
+npm install -g npm expo-cli
+Upgrade Outdated Dependencies
+Inside your Expo project folder (CourseApp), run:
+
+
+npm outdated
+This will show a list of outdated packages.
+To upgrade them:
+
+npm update
+Manually Fix Specific Deprecated Packages
+
+If npm update does not fix the deprecated packages, manually install newer versions:
+
+npm install rimraf@latest glob@latest lru-cache@latest
+Fix Security Vulnerabilities
+
+Run:
+
+npm audit fix
+If needed, force fix with:
+
+npm audit fix --force
+
+----------------------------------------
+
+
+
+
+
+🔍 Understanding npm audit fix and npm audit fix --force
+When you install packages using npm install, some of them may have security vulnerabilities. npm provides a built-in tool called npm audit to check for and fix these issues.
+
+
+1️⃣ What is npm audit fix?
+
+npm audit fix
+This command automatically fixes security vulnerabilities by updating packages only if it won't break your project.
+It updates minor and patch versions (e.g., 1.0.1 → 1.0.2) but avoids major updates that could cause compatibility issues.
+✅ Safe to use because it won't upgrade breaking changes.
+
+
+2️⃣ What is npm audit fix --force?
+
+npm audit fix --force
+This forces npm to fix all vulnerabilities, even if it means installing breaking changes.
+It updates major versions (e.g., 1.0.1 → 2.0.0), which can break your project if dependencies are not compatible.
+⚠️ Use with caution because it might make your app unstable or cause errors.
+
+----------------------------------------------------------------------------------
+

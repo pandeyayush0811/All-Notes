@@ -1,0 +1,141 @@
+1. useState Hook : ye kuch nhi samjo ek aisa function jo ki ek variable ke data ko update kar deta hai bss...
+
+🔥
+
+🚀 useState in Simple Words
+useState ek function hai jo React ko batata hai:
+✔ Ek variable banao (state)
+✔ Usko update karne ka ek function do
+
+💡 Example:
+
+const [name, setName]  = useState("Ayush")
+
+
+kyunki ek tarah se frontend ka topic hai so, ek fayda hai usestste ka ki jab bhi ye update hua ye turant screen me realtime me render ho jata h. yhi hai sbse bada fayda , kyunki vaisa function to koi bhi bna dega , lekin jaise hin hua variable me kuch bhi vo turant render kar deta hai.......
+
+----------------------------------------------------------------------------------------------
+
+2. seEffect Hook : 
+
+🟢 useEffect Hook: Ek Simple Samajh
+    Samjho tumhare paas ek alarm hai jo:
+
+    Subah bajta hai jaise hi din start hota hai. ⏰
+    Tab bhi bajta hai jab koi important event hota hai. 🔔
+    Ya phir sirf ek baar bajta hai jab tumne usko set kiya. ✅
+    🚀 Bas useEffect bhi ek aisa alarm hai jo React me kaam karta hai!
+
+🟢 useEffect Kab Kaam Karta Hai?
+
+        👉 1. Jaise hi Page Load hota hai (Mount hota hai)
+        👉 2. Jab koi specific variable change hota hai
+        👉 3. Jab Component Band (Unmount) hota hai
+
+    🟢 Example 1: Page Load hone pe ek baar run hoga
+
+            useEffect(() => {
+              console.log("Page Load ho gaya!");
+            }, []);
+
+            ✅ Jab bhi page open hoga, yeh ek baar chalega.
+
+    🟢 1. Component Load Hone pe ([] empty dependency)
+
+            ✅ Jab app load hoti hai, ek baar koi kaam karna ho
+            (Example: API se data fetch karna, local storage se user details lana)
+
+            useEffect(() => {
+              console.log("App Open Hui!"); // 🛠️ Sirf ek baar chalega
+            }, []);
+
+
+    🟢 Example 2: Jab count variable change ho
+
+            useEffect(() => {
+              console.log(`Count ab hai: ${count}`);
+            }, [count]);
+            ✅ Jab bhi count badlega, ye code chalega.
+
+---------------------------------------------------------------------------------------------
+
+3. 📌 useRef ko Simple Words me Samjho : 
+
+    🔥 useRef ek aisa variable hai jo re-render hone par bhi apni value yaad rakhta hai, bina component ko dobara render kiye!
+
+    🟢 1. useState vs useRef - Basic Difference
+
+        Feature	                    useState                        	useRef              
+        Value Change	     Re-render hota hai	                   Re-render nahi hota
+        Where to Use?	     UI update karne ke liye	        DOM element ya kisi value ko store karne ke liye
+
+
+    Example	Input value store karna	Button kitni baar click hua, last me result dene ke liye.....
+
+
+----------------------------------------------------------------------------------------------
+
+4. useContext Hook : 
+
+🛑 Problem (Before useContext) – "Props Drilling" 🤕
+    Pehle agar kisi bhi global data ko ek component se doosre component tak bhejna hota, to hume props pass karna padta.
+
+    💀 Problem ye thi ki:
+
+    Agar Navbar ko user ka data chahiye, to App -> Navbar tak props pass karna padta.
+    Agar Sidebar me bhi user chahiye to waha bhi alag se props bhejna padta.
+    Agar structure complex ho jaye (nested components ho), to ye aur bhi bekar lagta!
+    🧩 Example (Old Way – Without Context)
+
+
+            function App() {
+              const [user, setUser] = useState("Ayush");
+
+              return <Navbar user={user} />; // 👈 Har jagah props pass karna pad raha
+            }
+
+            function Navbar({ user }) {
+              return <h1>Welcome, {user}</h1>;
+            }
+
+        👉 Har jagah props bhejna bore ho jata hai!
+
+✅ Solution (With useContext) – No Props Drilling! 🎉
+    💡 useContext ne ye problem solve kar di:
+    ✔ Ek Global State bana do (context)
+    ✔ Jo bhi component ko data chahiye, direct access kar lo!
+    ✔ Props pass karne ki koi zaroorat nahi!
+
+🎯 New Way – With Context:
+
+            const UserContext = createContext();
+
+            function App() {
+              const [user, setUser] = useState("Ayush");
+
+              return (
+                <UserContext.Provider value={user}>
+                  <Navbar /> {/* 🚀 No props needed! */}
+                </UserContext.Provider>
+              );
+            }
+
+            function Navbar() {
+              const user = useContext(UserContext); // 👈 Direct access!
+              return <h1>Welcome, {user}</h1>;
+            }
+🔥 Summary – useContext Kya Solve Karta Hai?
+❌ Pehle: props ko har jagah manually pass karna padta
+✅ Ab: Ek baar context me store karo, har jagah direct access kar lo
+
+⚡ Samajh aaya? Pehle "props drilling" ka dukh tha, useContext ne "global access" de diya! 🚀
+
+
+
+Matlab Humne ek global variable banaya aur save kar diya. Ab koi bhi component kisi bhi file me usko directly access kar sakta hai. Yehi hai useContext. 🚀
+
+--------------------------------------------------------------------------------------------------------------
+
+
+
+

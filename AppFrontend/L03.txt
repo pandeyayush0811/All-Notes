@@ -1,0 +1,39 @@
+-----------------------------------------------------------------------------------------
+
+Part 03 start hoga (Auth) folder se : First line hoga : YAHAN SE PART 03 START.......
+
+--------------------------------------------------------------------------------------------
+
+                                        Part 03 From Auth folder :
+            
+                                    --------------------------------------
+
+1. (Auth) is also a group folder , jo () isme hai vo Group folder h bss.
+
+First Page jo banaya vo hain : Signup Page :
+
+TextInput use kiya for input :
+
+  <TextInput
+                    style={authStyle.username} - for style 
+                    placeholder="Username " - placeholder
+                    multiline={false}
+                    value={name} // ✅ Value bind kiya
+                    onChangeText={(text) => setUsername(text)} // ✅ Input update hoga
+
+
+        1. 📌 multiline={false} in <TextInput> :
+✅ Definition: multiline={false} ka matlab hai ki TextInput ek single-line input field hoga.
+✅ Default behavior: multiline ki default value false hoti hai, iska matlab hai ki Enter press karne pe text next line me nahi jayega.
+
+🔥 Real-world use case:
+multiline={false} (Name, Email, Password input fields ke liye)
+multiline={true} (Bio, Feedback form, Chat message box ke liye)
+
+        2. value={name} // ✅ Value bind kiya
+dekho placeholder hota hai ki box me dikga kya and value hota hai jo user usme type karega. iss code se hmm keh rhe hai ki user jo bhi type kare use name variable me store karo jo uper banaye hain.
+
+        3. onChangeText={(text) => setUsername(text)} // ✅ Input update hoga
+on change text bilkul onpress jaisa hai ki jaise kuch bhi value me chaange ho vaise hin settext method call karo. 
+
+

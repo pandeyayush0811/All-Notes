@@ -1,0 +1,15 @@
+1. Setup Project : go to expo docs and wahan pe command milega first app setup karne ka usko laake paste kar do.
+
+             npx create-expo-app@latest
+
+2. iss setup me pehle se bahut code hoga, poora folder structure hoga , so hmm start se sikh rhe hain so, hmm ye sab delete karenge but khud se nhi , expo ek code deta isko karne ke liye bhi , wahin site pe, to hmm usko paste kar denge.
+
+            npm run reset-project
+
+3. Project Start : 
+
+                npx expo start
+
+4. 
+
+
